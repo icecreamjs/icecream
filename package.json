@@ -1,0 +1,11 @@
+{
+  "name": "icecream",
+  "version": "0.0.1",
+  "description": "a lightweight framework to handle your redux State, Reducers and Sagas in a convenient way. ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "rdhox",
+  "license": "ISC"
+}
