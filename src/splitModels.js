@@ -2,34 +2,31 @@
  * @param {array} models
  * TODO: handle subscriptions!
  */
-module.exports = function splitModels(models) {
-  let globalDefaultState = {};
-  let globalReducers = {};
-  let globalSubscriptions = {};
-  let globalEffects = {};
+function splitModels(models) {
+  let defaultState = {};
+  let reduxReducers = {};
+  let reduxSubscriptions = {};
+  let sagaEffects = {};
   models.forEach(model => {
     const { namespace, state, reducers, subscriptions, effects } = model;
     // We organize the global state
-    globalDefaultState[namespace] = state;
+    defaultState[namespace] = state;
     // We extract, rename with the namespace and organize the reducers
     Object.keys(reducers).forEach(r => {
-      globalReducers = {
-        ...globalReducers,
+      reduxReducers = {
+        ...reduxReducers,
         [`${namespace}/${r}`]: reducers[r]
       };
     });
     // We extract, rename with the namespace and organize the effects
     Object.keys(effects).forEach(e => {
-      globalEffects = {
-        ...globalEffects,
+      sagaEffects = {
+        ...sagaEffects,
         [`${namespace}/${e}`]: effects[e]
       };
     });
   });
-  return {
-    globalDefaultState,
-    globalReducers,
-    globalSubscriptions,
-    globalEffects
-  };
-};
+  return [defaultState, reduxReducers, reduxSubscriptions, sagaEffects];
+}
+
+export default splitModels;

@@ -12,5 +12,10 @@
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "invariant": "^2.2.4"
+  },
+  "peerDependencies": {
+    "redux": "4.x"
+  }
 }
