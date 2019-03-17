@@ -1,8 +1,10 @@
 const path = require("path");
 const fs = require("fs");
-const util = require("util");
-
-const rootProjectPath = "../";
+const { createStore, combineReducers, applyMiddleware } = require("redux");
+const createSagaMiddleware = require("redux-saga");
+// Import functions
+const retrieveAllModels = require("./retrieveAllModels");
+const splitModels = require("./splitModels");
 
 const modelStructure = {
   namespace: "",
@@ -12,56 +14,44 @@ const modelStructure = {
   subscriptions: {}
 };
 
-/**  Recover all models objects from projects
- * @param {string} modelsFolder
- * ! Créer Promise!
- */
-function recoverAllModels(modelsFolder = "models/") {
-  const templatePath = path.resolve(rootProjectPath, modelsFolder);
-  try {
-    if (fs.existsSync(templatePath)) {
-      const paths = fs.readdirSync(templatePath);
-      const models = [];
-      paths.forEach(p => {
-        absPath = path.resolve(templatePath, p);
-        models.push(require(absPath));
-      });
-      return models;
-    }
-  } catch (error) {
-    console.error(error);
-  }
+function* rootSaga(effects) {
+  yield all([...effects]);
 }
 
-/** Split models to separate and organize state, reducers, subscriptions and effects
- * @param {array} models
- * TODO A finir!
- */
-function splitModels(models) {
-  const globalDefaultState = {};
-  const globalReducers = {};
-  const globalSubscriptions = {};
-  const globalEffects = {};
-  models.forEach(model => {
-    const { namespace, state, reducers, subscriptions, effects } = model;
-    // We extract and organize for the global state
-    Object.keys(state).forEach(s => {
-      globalDefaultState[namespace][s] = state[s];
-    });
-    // We extract, rename with the namespace and organize the reducers
-    Object.keys(reducers).forEach(r => {
-      const key = `${namespace}/${r}`;
-      globalReducers[key] = reducers[r];
-    });
-    // We extract, rename with the namespace and organize the effects
-    Object.keys(effects).forEach(e => {
-      const key = `${namespace}/${e}`;
-      globalEffects[key] = effects[e];
-    });
+/** initialize the project */
+function initialize() {
+  return new Promise((resolve, reject) => {
+    retrieveAllModels()
+      .then(models => {
+        const {
+          globalDefaultState,
+          globalReducers,
+          globalSubscriptions,
+          globalEffects
+        } = splitModels(models);
+        console.log(globalReducers);
+
+        const sagaMiddleware =
+          typeof createSagaMiddleware === "function"
+            ? createSagaMiddleware()
+            : createSagaMiddleware.default();
+
+        const reducer = combineReducers({ ...globalReducers });
+
+        const store = createStore(
+          reducer,
+          globalDefaultState,
+          applyMiddleware(sagaMiddleware)
+        );
+
+        sagaMiddleware.run(rootSaga(globalEffects));
+
+        resolve(store);
+      })
+      .catch(error => reject(error));
   });
-  console.log(globalDefaultState);
-  console.log(globalReducers);
-  console.log(globalEffects);
 }
 
-recoverAllModels();
+initialize()
+  .then(store => console.log(store))
+  .catch(error => console.error(error));
