@@ -1,26 +1,27 @@
-import * as sagaEffects from "redux-saga/effects";
+import { all } from "redux-saga/effects";
+import * as customEffects from "./customEffects";
 
 /** create a saga
- *
+ * by default use takeEvery, but if fn is Array, use fn[0] which is the effect choose by the user
  */
-function createSagaFn(action, type, fn) {
+function createSagaFn({ type, effect, fn }) {
   return function*() {
-    yield takeEvery(type, () => fn(action, sagaEffects));
+    yield customEffects[effect](type, fn);
   };
 }
 
-function rootSaga(effects) {
-  return function*() {
-    yield all(effects);
-  };
-}
-
-/** create the saga to run
+/** generate the saga from the model
  * @param {object} effects
  * @return {generator}
  */
 function createSaga(effects) {
-  console.log(effects);
+  const sagas = [];
+  effects.forEach(e => {
+    sagas.push(createSagaFn(e)());
+  });
+  return function*() {
+    yield all(sagas);
+  };
 }
 
 export default createSaga;

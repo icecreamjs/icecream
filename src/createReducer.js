@@ -1,5 +1,10 @@
 import { combineReducers } from "redux";
 
+// Action to remember the last dispatch for subscription.
+function lastDispatch(state = null, { type }) {
+  return type;
+}
+
 /** build function reducer for redux
  * @param {string} type
  * @param {function} fn
@@ -39,7 +44,7 @@ function createReducer(reducersCollection) {
   for (const model in reducersCollection) {
     globalObjectReducer[model] = createModelReducer(reducersCollection[model]);
   }
-  return combineReducers(globalObjectReducer);
+  return combineReducers({ ...globalObjectReducer, lastDispatch });
 }
 
 export default createReducer;

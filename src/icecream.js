@@ -6,6 +6,7 @@ import invariant from "invariant";
 import splitModels from "./splitModels";
 import createReducer from "./createReducer";
 import createSaga from "./createSaga";
+import createSubscriptions from "./createSubscriptions";
 
 /** build redux store and sagas
  * @param {object} defaultState
@@ -13,22 +14,23 @@ import createSaga from "./createSaga";
  * @param {object} subscriptions
  * @param {object} effects
  * @returns {object} redux store of application
- * TODOs managing subscriptions!
- * TODOs managing effects!
  */
 function buildSystem(defaultState, reducers, subscriptions, effects, plugins) {
   try {
     const sagaMiddleware = createSagaMiddleware();
     // We build the global reducer
     const reducer = createReducer(reducers);
+    const saga = createSaga(effects);
     let middleware = [...plugins, sagaMiddleware];
     const store = createStore(
       reducer,
       defaultState,
       applyMiddleware(...middleware)
     );
-    const saga = createSaga(effects);
-    // sagaMiddleware.run(rootSaga(effects));
+    createSubscriptions(store, subscriptions, store.getState());
+    sagaMiddleware.run(saga);
+    // We subscribe
+
     return store;
   } catch (error) {
     throw error;

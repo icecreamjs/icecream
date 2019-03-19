@@ -1,15 +1,15 @@
 import invariant from "invariant";
 import checkModel from "./checkModel";
+import { effectsName } from "./customEffects";
 
 /** Split models to separate and organize state, reducers, subscriptions and effects
  * @param {array} models
- * TODO: handle subscriptions!
  */
 function splitModels(models) {
   let defaultState = {};
   let reduxReducers = {};
   let reduxSubscriptions = {};
-  let sagaEffects = {};
+  let sagaEffects = [];
 
   models.forEach(model => {
     checkModel(model);
@@ -33,12 +33,18 @@ function splitModels(models) {
         });
       }
     });
+    // we extract and organize the subscriptions
+    reduxSubscriptions[namespace] = [];
+    Object.keys(subscriptions).forEach(s => {
+      reduxSubscriptions[namespace].push(subscriptions[s]);
+    });
     // We extract, rename with the namespace and organize the effects
     Object.keys(effects).forEach(e => {
-      sagaEffects = {
-        ...sagaEffects,
-        [`${namespace}/${e}`]: effects[e]
-      };
+      sagaEffects.push({
+        type: `${namespace}/${effects[e].name}`,
+        effect: effectsName.includes(e) ? e : "takeEvery",
+        fn: effects[e]
+      });
     });
   });
   return [defaultState, reduxReducers, reduxSubscriptions, sagaEffects];
