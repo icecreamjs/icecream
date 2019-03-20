@@ -27,11 +27,11 @@ function createReducerFn(type, fn, initialState) {
  * @return {function} combine reducer function
  */
 function createModelReducer(modelReducers) {
-  let reducerCollection = {};
-  modelReducers.forEach(o => {
+  const reducerCollection = modelReducers.reduce((acc, o) => {
     const { type, name, initialState, fn } = o;
-    reducerCollection[name] = createReducerFn(type, fn, initialState);
-  });
+    acc[name] = createReducerFn(type, fn, initialState);
+    return acc;
+  }, {});
   return combineReducers(reducerCollection);
 }
 
@@ -40,10 +40,13 @@ function createModelReducer(modelReducers) {
  * @return {function} redux reducer
  */
 function createReducer(reducersCollection) {
-  const globalObjectReducer = {};
-  for (const model in reducersCollection) {
-    globalObjectReducer[model] = createModelReducer(reducersCollection[model]);
-  }
+  const globalObjectReducer = Object.keys(reducersCollection).reduce(
+    (acc, model) => {
+      acc[model] = createModelReducer(reducersCollection[model]);
+      return acc;
+    },
+    {}
+  );
   return combineReducers({ ...globalObjectReducer, lastDispatch });
 }
 

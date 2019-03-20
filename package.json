@@ -1,14 +1,20 @@
 {
   "name": "icecream",
   "version": "0.0.1",
-  "description": "a lightweight framework to handle your redux State, Reducers and Sagas in a convenient way. ",
+  "description": "a lightweight framework to handle your redux state, reducers, subscriptions and sagas in a convenient way.",
   "main": "./src/icecream.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "w-test": "jest --watch"
   },
   "author": "rdhox",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/preset-env": "^7.4.0",
+    "@types/jest": "^24.0.11",
+    "babel-jest": "^24.5.0",
+    "jest": "^24.5.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2"
   },

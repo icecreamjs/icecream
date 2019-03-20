@@ -1,4 +1,4 @@
-/** subscribe
+/** subscribe functions
  * @param {object} store
  * @param {object} subscriptions
  * @param {object} state

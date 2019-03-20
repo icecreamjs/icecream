@@ -17,27 +17,33 @@ function splitModels(models) {
     // We organize the global initialState
     defaultState[namespace] = state;
     // We extract, rename with the namespace and organize the reducers
-    reduxReducers[namespace] = [];
-    Object.keys(reducers).forEach(reducerName => {
-      const allowed = Object.keys(state).includes(reducerName);
-      invariant(
-        allowed,
-        `The reducer "${reducerName}" for the "${namespace}" model do not correspond to any initial state. Reducers have to correspond with state.`
-      );
-      if (allowed) {
-        reduxReducers[namespace].push({
-          type: `${namespace}/${reducerName}`,
-          name: reducerName,
-          initialState: state[reducerName],
-          fn: reducers[reducerName]
-        });
-      }
-    });
+    reduxReducers[namespace] = Object.keys(reducers).reduce(
+      (acc, reducerName) => {
+        const allowed = Object.keys(state).includes(reducerName);
+        invariant(
+          allowed,
+          `The reducer "${reducerName}" for the "${namespace}" model do not correspond to any initial state. Reducers have to correspond with state.`
+        );
+        if (allowed) {
+          acc.push({
+            type: `${namespace}/${reducerName}`,
+            name: reducerName,
+            initialState: state[reducerName],
+            fn: reducers[reducerName]
+          });
+        }
+        return acc;
+      },
+      []
+    );
     // we extract and organize the subscriptions
-    reduxSubscriptions[namespace] = [];
-    Object.keys(subscriptions).forEach(s => {
-      reduxSubscriptions[namespace].push(subscriptions[s]);
-    });
+    reduxSubscriptions[namespace] = Object.keys(subscriptions).reduce(
+      (acc, s) => {
+        acc.push(subscriptions[s]);
+        return acc;
+      },
+      []
+    );
     // We extract, rename with the namespace and organize the effects
     Object.keys(effects).forEach(e => {
       sagaEffects.push({
@@ -47,6 +53,7 @@ function splitModels(models) {
       });
     });
   });
+
   return [defaultState, reduxReducers, reduxSubscriptions, sagaEffects];
 }
 

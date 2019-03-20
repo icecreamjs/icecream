@@ -15,10 +15,11 @@ function createSagaFn({ type, effect, fn }) {
  * @return {generator}
  */
 function createSaga(effects) {
-  const sagas = [];
-  effects.forEach(e => {
-    sagas.push(createSagaFn(e)());
-  });
+  const sagas = effects.reduce((acc, e) => {
+    acc.push(createSagaFn(e)());
+    return acc;
+  }, []);
+
   return function*() {
     yield all(sagas);
   };

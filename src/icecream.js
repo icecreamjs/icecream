@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
 import createSagaMiddleware from "redux-saga";
-import { all } from "redux-saga/effects";
 import invariant from "invariant";
 // Import functions
 import splitModels from "./splitModels";
@@ -15,7 +14,7 @@ import createSubscriptions from "./createSubscriptions";
  * @param {object} effects
  * @returns {object} redux store of application
  */
-function buildSystem(defaultState, reducers, subscriptions, effects, plugins) {
+function build(defaultState, reducers, subscriptions, effects, plugins) {
   try {
     const sagaMiddleware = createSagaMiddleware();
     // We build the global reducer
@@ -47,7 +46,7 @@ function initialize(configuration) {
     const [defaultState, reducers, subscriptions, effects] = splitModels(
       models
     );
-    const store = buildSystem(
+    const store = build(
       defaultState,
       reducers,
       subscriptions,
