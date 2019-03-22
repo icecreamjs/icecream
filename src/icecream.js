@@ -28,8 +28,6 @@ function build(defaultState, reducers, subscriptions, effects, plugins) {
     );
     createSubscriptions(store, subscriptions, store.getState());
     sagaMiddleware.run(saga);
-    // We subscribe
-
     return store;
   } catch (error) {
     throw error;

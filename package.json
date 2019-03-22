@@ -5,7 +5,7 @@
   "main": "./src/icecream.js",
   "scripts": {
     "test": "jest",
-    "w-test": "jest --watch"
+    "w-test": "jest --watch --verbose"
   },
   "author": "rdhox",
   "license": "ISC",

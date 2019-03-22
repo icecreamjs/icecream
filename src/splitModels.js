@@ -19,19 +19,12 @@ function splitModels(models) {
     // We extract, rename with the namespace and organize the reducers
     reduxReducers[namespace] = Object.keys(reducers).reduce(
       (acc, reducerName) => {
-        const allowed = Object.keys(state).includes(reducerName);
-        invariant(
-          allowed,
-          `The reducer "${reducerName}" for the "${namespace}" model do not correspond to any initial state. Reducers have to correspond with state.`
-        );
-        if (allowed) {
-          acc.push({
-            type: `${namespace}/${reducerName}`,
-            name: reducerName,
-            initialState: state[reducerName],
-            fn: reducers[reducerName]
-          });
-        }
+        acc.push({
+          type: `${namespace}/${reducerName}`,
+          name: reducerName,
+          initialState: state[reducerName],
+          fn: reducers[reducerName]
+        });
         return acc;
       },
       []

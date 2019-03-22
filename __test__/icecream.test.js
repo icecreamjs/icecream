@@ -1,6 +1,5 @@
 import iceCreamPlease from "../src/icecream";
 import appModel from "../__mock__/appModel.mock";
-import appBadmodel from "../__mock__/appBadModel.mock";
 
 describe("iceCreamPlease...", () => {
   test("should throw error if the object configuration miss the models key", () => {
