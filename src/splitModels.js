@@ -1,4 +1,3 @@
-import invariant from "invariant";
 import checkModel from "./checkModel";
 import { effectsName } from "./customEffects";
 

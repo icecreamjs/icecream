@@ -26,7 +26,7 @@ function build(defaultState, reducers, subscriptions, effects, plugins) {
       defaultState,
       applyMiddleware(...middleware)
     );
-    createSubscriptions(store, subscriptions, store.getState());
+    createSubscriptions(store, subscriptions);
     sagaMiddleware.run(saga);
     return store;
   } catch (error) {
