@@ -5,8 +5,8 @@ import { effectsName } from "./customEffects";
  * @param {array} models
  */
 function splitModels(models) {
-  let defaultState = {};
-  let reduxReducers = {};
+  let defaultState = { _ic: { lD: "" } };
+  let reduxReducers = [];
   let reduxSubscriptions = {};
   let sagaEffects = [];
 
@@ -16,18 +16,17 @@ function splitModels(models) {
     // We organize the global initialState
     defaultState[namespace] = state;
     // We extract, rename with the namespace and organize the reducers
-    reduxReducers[namespace] = Object.keys(reducers).reduce(
-      (acc, reducerName) => {
+    reduxReducers = [
+      ...reduxReducers,
+      ...Object.keys(reducers).reduce((acc, reducerName) => {
         acc.push({
           type: `${namespace}/${reducerName}`,
-          name: reducerName,
           initialState: state[reducerName],
           fn: reducers[reducerName]
         });
         return acc;
-      },
-      []
-    );
+      }, [])
+    ];
     // we extract and organize the subscriptions
     reduxSubscriptions[namespace] = Object.keys(subscriptions).reduce(
       (acc, s) => {
@@ -45,7 +44,6 @@ function splitModels(models) {
       });
     });
   });
-
   return [defaultState, reduxReducers, reduxSubscriptions, sagaEffects];
 }
 

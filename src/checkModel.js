@@ -63,21 +63,6 @@ function checkModel(model) {
     "Namespace should be a regular word, no special character, not white space and not empty"
   );
 
-  /********** State && Reducers ***********/
-  // Check if reducers match the states
-  const stateKeys = Object.keys(model.state);
-  const reducerKeys = Object.keys(model.reducers);
-  let reducerMissing = null;
-  reducerKeys.forEach(reducer => {
-    if (!stateKeys.includes(reducer)) reducerMissing = reducer;
-  });
-  invariant(
-    reducerMissing === null,
-    `The reducer "${reducerMissing}" for the "${
-      model.namespace
-    }" model do not correspond to any initial state. Reducers have to correspond with state.`
-  );
-
   /********** Type ***********/
   // Check if element of reducers are only functions
   checkTypeElementsInModel.bind(

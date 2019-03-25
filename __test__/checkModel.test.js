@@ -131,25 +131,6 @@ describe("Model Structure: Namespace...", () => {
 });
 
 describe("Model Structure: State and Reducers...", () => {
-  it("reducers shouldn't have keys that state don't have.", () => {
-    const mockModel = {
-      namespace: "app",
-      state: {
-        active: true,
-        nbUser: 150
-      },
-      reducers: {
-        active: (state, action) => action.active,
-        nbUser: (state, action) => action.nb,
-        notifications: (state, action) => state + 1
-      },
-      effects: {},
-      subscriptions: {}
-    };
-    expect(() => checkModel(mockModel)).toThrow(
-      'The reducer "notifications" for the "app" model do not correspond to any initial state. Reducers have to correspond with state.'
-    );
-  });
   it("state can exist without a reducer", () => {
     const mockModel = {
       namespace: "app",

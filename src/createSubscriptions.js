@@ -8,7 +8,7 @@ function createSubscriptions(store, subscriptions) {
   Object.keys(subscriptions).forEach(model => {
     subscriptions[model].forEach(fn => {
       store.subscribe(() => {
-        if (store.getState().lastDispatch.split("/")[0] === model) {
+        if (store.getState()._ic.lD.split("/")[0] === model) {
           fn(store.getState()[model]);
         }
       });

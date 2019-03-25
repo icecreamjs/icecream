@@ -17,7 +17,6 @@ import createSubscriptions from "./createSubscriptions";
 function build(defaultState, reducers, subscriptions, effects, plugins) {
   try {
     const sagaMiddleware = createSagaMiddleware();
-    // We build the global reducer
     const reducer = createReducer(reducers);
     const saga = createSaga(effects);
     let middleware = [...plugins, sagaMiddleware];
