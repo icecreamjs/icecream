@@ -9,7 +9,7 @@ function createSubscriptions(store, subscriptions) {
     subscriptions[model].forEach(fn => {
       store.subscribe(() => {
         if (store.getState()._ic.lD.split("/")[0] === model) {
-          fn(store.getState()[model]);
+          fn(store.getState()[model], store.getState()._ic.lD);
         }
       });
     });
