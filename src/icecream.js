@@ -70,11 +70,11 @@ const configDefault = {
 function iceCreamPlease(configuration = configDefault) {
   invariant(
     Object.keys(configuration).includes("models"),
-    "icecream must has at least one model to work with!"
+    "icecream must have at least one model to work with!"
   );
   invariant(
     configuration.models.length > 0,
-    "icecream must has at least one model to work with!"
+    "icecream must have at least one model to work with!"
   );
   if (!Object.keys(configuration).includes("plugins")) {
     configuration.plugins = [];
