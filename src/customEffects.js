@@ -1,6 +1,8 @@
 import * as sagaEffects from "redux-saga/effects";
 import { take, fork, cancel, actionChannel } from "redux-saga/effects";
 
+export * from "redux-saga/effects";
+
 export const effectsName = [
   "takeEvery",
   "takeLatest",

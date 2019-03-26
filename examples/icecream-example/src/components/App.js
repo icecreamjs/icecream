@@ -6,7 +6,7 @@ const App = props => {
 
   const {
     counter: { number },
-    user: { name, post },
+    user: { name, post, fetchingPost },
     dispatch
   } = props;
 
@@ -63,11 +63,15 @@ const App = props => {
             onChange={e => setPostId(e.target.value)}
           />
         </div>
-        {Object.keys(post).length > 0 && (
-          <div>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
-          </div>
+        {fetchingPost ? (
+          <p>fetching...</p>
+        ) : (
+          Object.keys(post).length > 0 && (
+            <div>
+              <h3>{post.title}</h3>
+              <p>{post.body}</p>
+            </div>
+          )
         )}
       </div>
     </div>

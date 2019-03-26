@@ -25,7 +25,6 @@ function reduceForRedux(...reducers) {
 /** build function reducer for redux
  * @param {string} type
  * @param {function} fn
- * @param initialState
  * @return {function} function
  */
 function createReducerFn(type, fn) {
@@ -39,18 +38,25 @@ function createReducerFn(type, fn) {
   };
 }
 
-/** create global reducer for redux's createStore()
- * @param {object} reducersCollection
- * @return {function} redux reducer
+/**
+ * Reduce model's reducers to an array
+ * @param {array} reducers
+ * @return {array}
  */
-function createReducer(reducersCollection) {
-  const arrayReducers = reducersCollection.reduce((acc, r) => {
+export function getArrayFromReducersObject(reducers) {
+  return reducers.reduce((acc, r) => {
     const { type, fn } = r;
     acc.push(createReducerFn(type, fn));
     return acc;
   }, []);
-  const reduce = reduceForRedux(...arrayReducers);
-  return reduce;
+}
+
+/** create global reducer for redux's createStore()
+ * @param {object} reducers
+ * @return {function} redux reducer
+ */
+function createReducer(reducers) {
+  return reduceForRedux(...getArrayFromReducersObject(reducers));
 }
 
 export default createReducer;

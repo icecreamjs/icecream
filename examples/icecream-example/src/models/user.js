@@ -1,8 +1,11 @@
+import { getPostFromUser } from "../functions";
+
 export default {
   namespace: "user",
   state: {
     name: "",
-    post: {}
+    post: {},
+    fetchingPost: false
   },
   reducers: {
     name(state, { name }) {
@@ -14,7 +17,14 @@ export default {
     addPost(state, { post }) {
       return {
         ...state,
-        post
+        post,
+        fetchingPost: false
+      };
+    },
+    fetchingPost(state) {
+      return {
+        ...state,
+        fetchingPost: !state.fetchingPost
       };
     }
   },
@@ -31,24 +41,10 @@ export default {
     }
   },
   subscriptions: {
-    listen(state, lastDispatch) {
+    listen(state, lastDispatch, dispatch) {
       if (lastDispatch === "user/fetchPost") {
-        console.log("fetching data...");
+        dispatch({ type: "user/fetchingPost" });
       }
     }
   }
 };
-
-function getPostFromUser(id) {
-  const response = fetch(`https://jsonplaceholder.typicode.com/posts/${id}`)
-    .then(res => {
-      if (res.status !== 200) {
-        return;
-      }
-      return res.json();
-    })
-    .then(data => data)
-    .catch(error => error);
-
-  return response;
-}

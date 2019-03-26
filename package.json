@@ -2,12 +2,12 @@
   "name": "icecream",
   "version": "0.0.1",
   "description": "a lightweight framework to handle your redux state, reducers, subscriptions and sagas in a convenient way.",
-  "main": "./src/icecream.js",
+  "main": "./index.js",
   "scripts": {
     "test": "jest",
     "w-test": "jest --watch --verbose"
   },
-  "author": "rdhox",
+  "author": "Renaud Déchaux",
   "license": "MIT",
   "jest": {
     "testPathIgnorePatterns": [
