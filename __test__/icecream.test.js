@@ -10,11 +10,17 @@ describe("iceCreamPlease...", () => {
     const mockConfig = { models: [] };
     expect(() => iceCreamPlease(mockConfig)).toThrow();
   });
-  test('should create the key "plugins" in object configuration if doesn\'t exist', () => {
+  test('should create the key "middlewares" in object configuration if doesn\'t exist', () => {
     const mockConfig = { models: [appModel] };
-    expect(mockConfig.plugins).toBeUndefined();
+    expect(mockConfig.middlewares).toBeUndefined();
     iceCreamPlease(mockConfig);
-    expect(mockConfig.plugins).toEqual([]);
+    expect(mockConfig.middlewares).toEqual([]);
+  });
+  test('should create the key "enhancers" in object configuration if doesn\'t exist', () => {
+    const mockConfig = { models: [appModel] };
+    expect(mockConfig.enhancers).toBeUndefined();
+    iceCreamPlease(mockConfig);
+    expect(mockConfig.enhancers).toEqual([]);
   });
   test("should return the redux store", () => {
     const mockConfig = { models: [appModel] };

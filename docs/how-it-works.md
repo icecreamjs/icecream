@@ -1,7 +1,7 @@
 ---
 id: how-it-works
 title: How it works
-sidebar_label: General use
+sidebar_label: How it works
 hide_title: true
 ---
 
@@ -28,13 +28,13 @@ IceCreamPlease is a function that you import in the root file of your project. T
 Use your favorite packages manager:
 
 ```bash
-yarn add icecreamplease
+yarn add icecream-please
 ```
 
 or
 
 ```bash
-npm i --save icecreamplease
+npm i --save icecream-please
 ```
 
 ## Dependencies
@@ -172,4 +172,40 @@ const App = props => {
 export default connect(({ counter }) => ({ counter }))(App);
 ```
 
-And Voilà! You can find this example [here](https://github.com).
+And Voilà! You can find this example [here](https://github.com) and a less basic [here](https://github.com).
+
+## Middlewares and enhancers for Redux
+
+IceCreamPlease takes as argument an object which can have the `models` key that we just saw above and two others: `middlewares` and `enhancers`.
+
+To have the same behavior that:
+
+```js
+import { createStore, applyMiddleware, compose } from "redux";
+import logger from "redux-logger";
+import DevTools from "./containers/DevTools";
+import reducer from "../reducers";
+
+const store = createStore(
+  reducer,
+  compose(
+    applyMiddleware(logger),
+    DevTools.instrument()
+  )
+);
+```
+
+Do:
+
+```js
+import iceCreamPlease from "icecream-please";
+import logger from "redux-logger";
+import DevTools from "./containers/DevTools";
+import myModel from "./myModel";
+
+const store = iceCreamPlease({
+  models: [myModel],
+  middlewares: [logger],
+  enhancers: [DevTools.instrument()]
+});
+```

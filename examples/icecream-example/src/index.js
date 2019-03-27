@@ -16,7 +16,7 @@ const logger = createLogger({
 
 const store = iceCreamPlease({
   models: [counterModel, userModel],
-  plugins: [logger]
+  middlewares: [logger]
 });
 
 const Container = () => (

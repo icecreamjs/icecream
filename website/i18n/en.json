@@ -5,30 +5,21 @@
     "previous": "Previous",
     "tagline": "A lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.",
     "docs": {
-      "doc2": {
-        "title": "document number 2"
-      },
-      "doc3": {
-        "title": "This is document number 3"
-      },
-      "doc4": {
-        "title": "Other Document"
-      },
-      "doc5": {
-        "title": "Fifth Document"
-      },
       "how-it-works": {
         "title": "How it works",
-        "sidebar_label": "General use"
+        "sidebar_label": "How it works"
+      },
+      "models": {
+        "title": "Models",
+        "sidebar_label": "Models"
       }
     },
     "links": {
-      "How it works": "How it works",
-      "API": "API",
-      "Examples": "Examples"
+      "How it works": "How it works"
     },
     "categories": {
-      "How it works": "How it works"
+      "Start here": "Start here",
+      "More details": "More details"
     }
   },
   "pages-strings": {

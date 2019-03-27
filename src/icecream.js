@@ -1,4 +1,4 @@
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 import invariant from "invariant";
 // Import functions
@@ -12,18 +12,29 @@ import createListeners from "./createListeners";
  * @param {object} reducers
  * @param {object} listeners
  * @param {object} effects
+ * @param {array} middlewares
+ * @param {array} enhancers
  * @returns {object} redux store of application
  */
-function build(initialState, reducers, listeners, effects, plugins) {
+function build(
+  initialState,
+  reducers,
+  listeners,
+  effects,
+  middlewares,
+  enhancers
+) {
   try {
     const sagaMiddleware = createSagaMiddleware();
     const reducer = createReducer(reducers);
     const saga = createSaga(effects);
-    let middleware = [...plugins, sagaMiddleware];
     const store = createStore(
       reducer,
       initialState,
-      applyMiddleware(...middleware)
+      compose(
+        applyMiddleware(...middlewares, sagaMiddleware),
+        ...enhancers
+      )
     );
     createListeners(store, listeners);
     sagaMiddleware.run(saga);
@@ -38,10 +49,17 @@ function build(initialState, reducers, listeners, effects, plugins) {
  * @param {object} configuration
  */
 function initialize(configuration) {
-  const { models, plugins } = configuration;
+  const { models, middlewares, enhancers } = configuration;
   try {
     const [initialState, reducers, listeners, effects] = splitModels(models);
-    const store = build(initialState, reducers, listeners, effects, plugins);
+    const store = build(
+      initialState,
+      reducers,
+      listeners,
+      effects,
+      middlewares,
+      enhancers
+    );
     return store;
   } catch (error) {
     console.error(error);
@@ -51,7 +69,8 @@ function initialize(configuration) {
 
 const configDefault = {
   models: [],
-  plugins: []
+  middlewares: [],
+  enhancers: []
 };
 
 /** entry point
@@ -67,8 +86,11 @@ function iceCreamPlease(configuration = configDefault) {
     configuration.models.length > 0,
     "icecream must have at least one model to work with!"
   );
-  if (!Object.keys(configuration).includes("plugins")) {
-    configuration.plugins = [];
+  if (!Object.keys(configuration).includes("middlewares")) {
+    configuration.middlewares = [];
+  }
+  if (!Object.keys(configuration).includes("enhancers")) {
+    configuration.enhancers = [];
   }
   const storeToReturn = initialize(configuration);
   return storeToReturn;

@@ -9,13 +9,23 @@ export default {
   },
   reducers: {
     name(state, { name }) {
-      return { ...state, name };
+      return {
+        ...state,
+        name
+      };
     },
     addPost(state, { post }) {
-      return { ...state, post, fetchingPost: false };
+      return {
+        ...state,
+        post,
+        fetchingPost: false
+      };
     },
     fetchingPost(state) {
-      return { ...state, fetchingPost: !state.fetchingPost };
+      return {
+        ...state,
+        fetchingPost: !state.fetchingPost
+      };
     }
   },
   effects: {

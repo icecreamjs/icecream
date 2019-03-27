@@ -1,5 +1,6 @@
 {
   "docs": {
-    "How it works": ["how-it-works"]
+    "Start here": ["how-it-works"],
+    "More details": ["models"]
   }
 }
