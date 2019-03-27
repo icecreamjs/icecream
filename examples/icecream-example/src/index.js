@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import iceCreamPlease from "icecream";
+import iceCreamPlease from "icecream-please";
 import "./index.css";
 import App from "./components/App";
 import { createLogger } from "redux-logger";

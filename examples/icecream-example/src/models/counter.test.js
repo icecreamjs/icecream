@@ -1,13 +1,13 @@
 import reduceReducers from "reduce-reducers";
-import { getArrayFromModelReducers } from "icecream";
+import { getArrayFromModelReducers } from "icecream-please";
 import counterModel from "./counter";
 
-const { namespace, state, reducers } = counterModel;
+const { modelname, state, reducers } = counterModel;
 
 describe("Reducers of counter model...", () => {
   const reducer = reduceReducers(
     state,
-    ...getArrayFromModelReducers(namespace, reducers)
+    ...getArrayFromModelReducers(modelname, reducers)
   );
   test("should increment the counter", () => {
     expect(reducer(state, { type: "counter/add" })).toEqual({ number: 1 });

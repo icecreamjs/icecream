@@ -1,12 +1,12 @@
 /** subscribe functions
  * @param {object} store
- * @param {object} subscriptions
+ * @param {object} listeners
  * @param {object} state
  * @param {function} dispatch
  */
-function createSubscriptions(store, subscriptions) {
-  Object.keys(subscriptions).forEach(model => {
-    subscriptions[model].forEach(fn => {
+function createListeners(store, listeners) {
+  Object.keys(listeners).forEach(model => {
+    listeners[model].forEach(fn => {
       store.subscribe(() => {
         if (store.getState()._ic.lD.split("/")[0] === model) {
           fn(store.getState()[model], store.getState()._ic.lD, store.dispatch);
@@ -16,4 +16,4 @@ function createSubscriptions(store, subscriptions) {
   });
 }
 
-export default createSubscriptions;
+export default createListeners;

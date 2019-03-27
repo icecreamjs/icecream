@@ -3,12 +3,8 @@
   "localized-strings": {
     "next": "Next",
     "previous": "Previous",
-    "tagline": "A lightweight solution to handle your redux state, reducers, subscriptions and sagas in a convenient way.",
+    "tagline": "A lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.",
     "docs": {
-      "doc1": {
-        "title": "Latin-ish",
-        "sidebar_label": "Example Page"
-      },
       "doc2": {
         "title": "document number 2"
       },
@@ -20,6 +16,10 @@
       },
       "doc5": {
         "title": "Fifth Document"
+      },
+      "how-it-works": {
+        "title": "How it works",
+        "sidebar_label": "General use"
       }
     },
     "links": {
@@ -28,9 +28,7 @@
       "Examples": "Examples"
     },
     "categories": {
-      "Docusaurus": "Docusaurus",
-      "First Category": "First Category",
-      "Second Category": "Second Category"
+      "How it works": "How it works"
     }
   },
   "pages-strings": {

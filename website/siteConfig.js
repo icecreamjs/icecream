@@ -23,7 +23,7 @@ const users = [
 const siteConfig = {
   title: "iceCream", // Title for your website.
   tagline:
-    "A lightweight solution to handle your redux state, reducers, subscriptions and sagas in a convenient way.",
+    "A lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.",
   url: "https://your-docusaurus-test-site.com", // Your website URL
   baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
@@ -39,7 +39,7 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
-    { doc: "doc1", label: "How it works" },
+    { doc: "how-it-works", label: "How it works" },
     { doc: "doc4", label: "API" },
     { doc: "doc4", label: "Examples" }
   ],

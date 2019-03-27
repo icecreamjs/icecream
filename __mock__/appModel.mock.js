@@ -1,5 +1,5 @@
 export default {
-  namespace: "app",
+  modelname: "app",
   state: {
     text: "Hello World",
     status: true
@@ -15,7 +15,7 @@ export default {
     }
   },
   effects: {},
-  subscriptions: {
+  listeners: {
     listen(state) {
       console.log("I see you!");
     }

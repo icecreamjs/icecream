@@ -67,7 +67,7 @@ class HomeSplash extends React.Component {
         <div className="inner">
           <ProjectTitle siteConfig={siteConfig} />
           <PromoSection>
-            <Button href={docUrl("doc1.html")}>See how it works</Button>
+            <Button href={docUrl("how-it-works")}>How it works</Button>
           </PromoSection>
         </div>
       </SplashContainer>
@@ -99,44 +99,47 @@ class Index extends React.Component {
         className="productShowcaseSection paddingBottom"
         style={{ textAlign: "center" }}
       >
-        <h2>Why?</h2>
+        <h2>Motivations</h2>
         <MarkdownBlock>
           [*Redux*](https://redux.js.org/) and
           [*redux-saga*](https://redux-saga.js.org/) are commonly use to handle
           globals states in moderns JavaScript applications. Their integrations
           in projects on the long term can be painfull and lead to complex files
-          structures that make edition of the code a headache. IceCream takes up
-          the idea of **models** by the framework [*dvaJs*](https://dvajs.com/)
-          to centralize all the logic but with a less opiniated behavior. It's
-          why iceCream is not considered as a framework, but more as a solution
-          to simplify and organize your code structure, following the
-          **stricts** rules of Redux.
+          structures that make code edition a headache. IceCream takes up the
+          idea of **models** by the framework [*dvaJs*](https://dvajs.com/) to
+          centralize all the logic but with a less opiniated behavior. It's why
+          iceCream is not considered a framework, but more as a tool to simplify
+          and organize your code logic.
         </MarkdownBlock>
       </div>
     );
 
-    const TryOut = () => (
-      <Block id="try">
+    const Libraries = () => (
+      <Block background="light" layout="threeColumn">
         {[
           {
-            content: "Talk about trying this out",
-            image: `${baseUrl}img/docusaurus.svg`,
-            imageAlign: "left",
-            title: "Try it Out"
-          }
-        ]}
-      </Block>
-    );
-
-    const Description = () => (
-      <Block background="light">
-        {[
+            content: "A predictable state container for JavaScript apps.",
+            image: `${baseUrl}img/redux_logo.svg`,
+            imageLink: "https://redux.js.org/",
+            imageAlt: "Redux logo",
+            imageAlign: "top",
+            title: "Redux"
+          },
           {
+            title: "requisite knowledge",
             content:
-              "This is another description of how this project is useful",
-            image: `${baseUrl}img/docusaurus.svg`,
-            imageAlign: "right",
-            title: "Main idea: "
+              "iceCream helps you to use redux and redux-saga but you still have to known how they work and how to use them. Be sure to check their documentations before using iceCream!",
+            image: `${baseUrl}img/infoLogo.svg`,
+            imageAlt: "knowledge logo",
+            imageAlign: "top"
+          },
+          {
+            content: "An alternative side effect model for Redux apps",
+            image: `${baseUrl}img/Redux-Saga-Logo-Compact.png`,
+            imageLink: "https://redux-saga.js.org/",
+            imageAlt: "redux-saga logo",
+            imageAlign: "top",
+            title: "Redux-saga"
           }
         ]}
       </Block>
@@ -176,7 +179,7 @@ class Index extends React.Component {
         <HomeSplash siteConfig={siteConfig} language={language} />
         <div className="mainContainer">
           <FeatureCallout />
-          <Description />
+          <Libraries />
         </div>
       </div>
     );

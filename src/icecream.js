@@ -5,16 +5,16 @@ import invariant from "invariant";
 import splitModels from "./splitModels";
 import createReducer from "./createReducer";
 import createSaga from "./createSaga";
-import createSubscriptions from "./createSubscriptions";
+import createListeners from "./createListeners";
 
 /** build redux store and sagas
- * @param {object} defaultState
+ * @param {object} initialState
  * @param {object} reducers
- * @param {object} subscriptions
+ * @param {object} listeners
  * @param {object} effects
  * @returns {object} redux store of application
  */
-function build(defaultState, reducers, subscriptions, effects, plugins) {
+function build(initialState, reducers, listeners, effects, plugins) {
   try {
     const sagaMiddleware = createSagaMiddleware();
     const reducer = createReducer(reducers);
@@ -22,10 +22,10 @@ function build(defaultState, reducers, subscriptions, effects, plugins) {
     let middleware = [...plugins, sagaMiddleware];
     const store = createStore(
       reducer,
-      defaultState,
+      initialState,
       applyMiddleware(...middleware)
     );
-    createSubscriptions(store, subscriptions);
+    createListeners(store, listeners);
     sagaMiddleware.run(saga);
     return store;
   } catch (error) {
@@ -40,16 +40,8 @@ function build(defaultState, reducers, subscriptions, effects, plugins) {
 function initialize(configuration) {
   const { models, plugins } = configuration;
   try {
-    const [defaultState, reducers, subscriptions, effects] = splitModels(
-      models
-    );
-    const store = build(
-      defaultState,
-      reducers,
-      subscriptions,
-      effects,
-      plugins
-    );
+    const [initialState, reducers, listeners, effects] = splitModels(models);
+    const store = build(initialState, reducers, listeners, effects, plugins);
     return store;
   } catch (error) {
     console.error(error);

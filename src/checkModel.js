@@ -1,30 +1,30 @@
 import invariant from "invariant";
 
 const modelStructure = {
-  namespace: "",
+  modelname: "",
   state: {},
   reducers: {},
   effects: {},
-  subscriptions: {}
+  listeners: {}
 };
 
 /**
  * Check Type of element in object
  * @param {array} type
- * @param {string} namespace
+ * @param {string} modelname
  * @param {object} object
  */
-function checkTypeElementsInModel(type, namespace, object) {
+function checkTypeElementsInModel(type, modelname, object) {
   for (const key in object) {
     invariant(
       type.includes(object[key].constructor.name),
-      `"${key}" in model "${namespace}" is not a ${type[0]}.`
+      `"${key}" in model "${modelname}" is not a ${type[0]}.`
     );
   }
 }
 
 const structureString =
-  'The model must have this structure: {namespace: "", state: {}, reducers: {}, effects: {}, subscriptions: {}}';
+  'The model must have this structure: {modelname: "", state: {}, reducers: {}, effects: {}, listeners: {}}';
 
 /** Check the structure of model
  * @param {object} model
@@ -51,16 +51,16 @@ function checkModel(model) {
     `Model missing the key "${missingKey}". ${structureString}`
   );
 
-  /********** Namespace ***********/
-  // Check if namespace is a string
+  /********** modelname ***********/
+  // Check if modelname is a string
   invariant(
-    typeof model.namespace === "string",
-    "Namespace of model must be of string type."
+    typeof model.modelname === "string",
+    "modelname of model must be of string type."
   );
-  // Check if namespace is not just white space or empty and regular word
+  // Check if modelname is not just white space or empty and regular word
   invariant(
-    /^[A-Za-z]+$/.test(model.namespace),
-    "Namespace should be a regular word, no special character, not white space and not empty"
+    /^[A-Za-z]+$/.test(model.modelname),
+    "modelname should be a regular word, no special character, not white space and not empty"
   );
 
   /********** Type ***********/
@@ -68,22 +68,22 @@ function checkModel(model) {
   checkTypeElementsInModel.bind(
     null,
     ["Function"],
-    model.namespace,
+    model.modelname,
     model.reducers
   )();
   // Check if element of effects are only generators
   checkTypeElementsInModel.bind(
     null,
     ["GeneratorFunction", "AsyncGeneratorFunction"],
-    model.namespace,
+    model.modelname,
     model.effects
   )();
-  // Check if element of subscriptions are only functions
+  // Check if element of listeners are only functions
   checkTypeElementsInModel.bind(
     null,
     ["Function"],
-    model.namespace,
-    model.subscriptions
+    model.modelname,
+    model.listeners
   )();
 
   return true;

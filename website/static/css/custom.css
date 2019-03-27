@@ -17,9 +17,11 @@
     align-items: center;
     width: 25%;
   }
-
   .productShowcaseSection p {
     max-width: 900px;
+  }
+  .blockImageLibrary a img {
+    width: 400px;
   }
 }
 

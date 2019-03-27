@@ -1,16 +1,16 @@
 import reduceReducers from "reduce-reducers";
 import assert from "assert";
-import { getArrayFromModelReducers } from "icecream";
-import { call, put } from "icecream/effects";
+import { getArrayFromModelReducers } from "icecream-please";
+import { call, put } from "icecream-please/effects";
 import userModel from "./user";
 import { getPostFromUser } from "../functions";
 
-const { namespace, state, reducers, effects } = userModel;
+const { modelname, state, reducers, effects } = userModel;
 
 describe("Reducers of user model...", () => {
   const reducer = reduceReducers(
     state,
-    ...getArrayFromModelReducers(namespace, reducers)
+    ...getArrayFromModelReducers(modelname, reducers)
   );
   test("should change the state name", () => {
     expect(

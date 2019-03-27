@@ -3,14 +3,14 @@ import { effectsName } from "./customEffects";
 
 /**
  * Organize model's reducers for next step
- * @param {string} namespace
+ * @param {string} modelname
  * @param {object} reducers
  * @return {array} [{type, fn}]
  */
-export function organizeModelReducers(namespace, reducers) {
+export function organizeModelReducers(modelname, reducers) {
   return Object.keys(reducers).reduce((acc, reducerName) => {
     acc.push({
-      type: `${namespace}/${reducerName}`,
+      type: `${modelname}/${reducerName}`,
       fn: reducers[reducerName]
     });
     return acc;
@@ -19,14 +19,14 @@ export function organizeModelReducers(namespace, reducers) {
 
 /**
  * Organize model's effects for next step
- * @param {string} namespace
+ * @param {string} modelname
  * @param {object} effects
  * @return {array} [{type, effect, fn}]
  */
-export function organizeModelEffects(namespace, effects) {
+export function organizeModelEffects(modelname, effects) {
   return Object.keys(effects).reduce((acc, e) => {
     acc.push({
-      type: `${namespace}/${effects[e].name}`,
+      type: `${modelname}/${effects[e].name}`,
       effect: effectsName.includes(e) ? e : "takeEvery",
       fn: effects[e]
     });
@@ -35,40 +35,40 @@ export function organizeModelEffects(namespace, effects) {
 }
 
 /**
- * Organize model's subscription for next step
- * @param {object} subscriptions
+ * Organize model's listeners for next step
+ * @param {object} listeners
  * @return {array} [fn]
  */
-export function organizeModelSubscriptions(subscriptions) {
-  return Object.keys(subscriptions).reduce((acc, s) => {
-    acc.push(subscriptions[s]);
+export function organizeModelListeners(listeners) {
+  return Object.keys(listeners).reduce((acc, s) => {
+    acc.push(listeners[s]);
     return acc;
   }, []);
 }
 
-/** Split models to separate and organize state, reducers, subscriptions and effects
+/** Split models to separate and organize state, reducers, listeners and effects
  * @param {array} models
  */
 function splitModels(models) {
-  let defaultState = { _ic: { lD: "" } };
+  let initialState = { _ic: { lD: "" } };
   let reduxReducers = [];
-  let reduxSubscriptions = {};
+  let reduxListeners = {};
   let sagaEffects = [];
 
   models.forEach(model => {
     checkModel(model);
-    const { namespace, state, reducers, subscriptions, effects } = model;
+    const { modelname, state, reducers, listeners, effects } = model;
     // We organize the global initialState
-    defaultState[namespace] = state;
+    initialState[modelname] = state;
     reduxReducers = [
       ...reduxReducers,
-      ...organizeModelReducers(namespace, reducers)
+      ...organizeModelReducers(modelname, reducers)
     ];
-    reduxSubscriptions[namespace] = organizeModelSubscriptions(subscriptions);
-    sagaEffects = [...sagaEffects, ...organizeModelEffects(namespace, effects)];
+    reduxListeners[modelname] = organizeModelListeners(listeners);
+    sagaEffects = [...sagaEffects, ...organizeModelEffects(modelname, effects)];
   });
 
-  return [defaultState, reduxReducers, reduxSubscriptions, sagaEffects];
+  return [initialState, reduxReducers, reduxListeners, sagaEffects];
 }
 
 export default splitModels;

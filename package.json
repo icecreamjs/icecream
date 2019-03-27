@@ -1,7 +1,7 @@
 {
-  "name": "icecream",
+  "name": "icecream-please",
   "version": "0.0.1",
-  "description": "a lightweight framework to handle your redux state, reducers, subscriptions and sagas in a convenient way.",
+  "description": "a lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.",
   "main": "./index.js",
   "scripts": {
     "test": "jest",
