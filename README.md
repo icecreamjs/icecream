@@ -39,16 +39,6 @@ or
 npm i --save icecream-please
 ```
 
-## Dependencies
-
-IceCreamPlease has a peer dependencies with redux, it means that you have to install redux in your project. You don't have to install redux-saga but still can do it if you have the need. If you choose not to, you can still import the [redux-saga effects](https://redux-saga.js.org/docs/api/):
-
-```js
-import { call, put, select } from "icecream-please/effects";
-```
-
-That can be useful for testing.
-
 ## Basic example
 
 Let's start by writting a model.

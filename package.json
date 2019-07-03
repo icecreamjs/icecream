@@ -33,14 +33,11 @@
     "@babel/preset-env": "^7.4.0",
     "@types/jest": "^24.0.11",
     "babel-jest": "^24.5.0",
-    "jest": "^24.5.0",
-    "redux": "^4.0.1",
-    "redux-saga": "^1.0.2"
+    "jest": "^24.5.0"
   },
   "dependencies": {
-    "invariant": "^2.2.4"
-  },
-  "peerDependencies": {
-    "redux": "4.x"
+    "invariant": "^2.2.4",
+    "redux": "4.x",
+    "redux-saga": "1.x"
   }
 }
