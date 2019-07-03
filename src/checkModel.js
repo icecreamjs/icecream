@@ -15,12 +15,10 @@ const modelStructure = {
  * @param {object} object
  */
 function checkTypeElementsInModel(type, modelname, object) {
-  for (const key in object) {
-    invariant(
-      type.includes(object[key].constructor.name),
-      `"${key}" in model "${modelname}" is not a ${type[0]}.`
-    );
-  }
+  Object.keys(object).forEach(key => {
+    const typeName = object[key].constructor.displayName || object[key].constructor.name;
+    invariant(type.includes(typeName), `"${key}" in model "${modelname}" is not a ${type[0]}.`);
+  });
 }
 
 const structureString =

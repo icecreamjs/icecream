@@ -26,7 +26,7 @@ export function organizeModelReducers(modelname, reducers) {
 export function organizeModelEffects(modelname, effects) {
   return Object.keys(effects).reduce((acc, e) => {
     acc.push({
-      type: `${modelname}/${effects[e].name}`,
+      type: `${modelname}/${e}`,
       effect: effectsName.includes(e) ? e : "takeEvery",
       fn: effects[e]
     });
