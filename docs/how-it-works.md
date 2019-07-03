@@ -13,9 +13,12 @@ hide_title: true
 // index.js
 
 import iceCreamPlease from "icecream-please";
-import myModel from "./src/models/myModel";
+import userModel from "./src/models/userModel";
+import authModel from "./src/models/authModel";
 
-const store = iceCreamPlease({models: [myModel]});
+const store = iceCreamPlease({
+  models: [userModel, authModel],
+});
 
 ...
 
@@ -49,7 +52,7 @@ That can be useful for testing.
 
 ## Basic example
 
-Let's start by writting a model.  
+Let's start by writting a model.
 A model is a classic JavaScript object `key/value` that will contains all the necessary logic for a part of your application to works.
 You can have only one model for your entire application, but it usually useful to organize your application by splitting it in differents parts.
 
@@ -97,7 +100,9 @@ Ok, you remember the code at the top of this page? Well we do exactly the same t
 import iceCreamPlease from "icecream-please";
 import counterModel from "./counterModel";
 
-const store = iceCreamPlease({models: [counterModel]});
+const store = iceCreamPlease({
+  models: [counterModel],
+});
 
 ...
 

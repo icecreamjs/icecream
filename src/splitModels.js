@@ -25,11 +25,24 @@ export function organizeModelReducers(modelname, reducers) {
  */
 export function organizeModelEffects(modelname, effects) {
   return Object.keys(effects).reduce((acc, e) => {
-    acc.push({
-      type: `${modelname}/${e}`,
-      effect: effectsName.includes(e) ? e : "takeEvery",
-      fn: effects[e]
-    });
+    if (effectsName.includes(e)) {
+      const helperAr = Object.keys(effects[e]).reduce((ac, f) => {
+        ac.push({
+          type: `${modelname}/${f}`,
+          effect: e,
+          fn: effects[e][f]
+        });
+        return ac;
+      }, []);
+      return [...acc, ...helperAr];
+    }
+    if (!effectsName.includes(e) && typeof effects[e] === 'function') {
+      acc.push({
+        type: `${modelname}/${e}`,
+        effect: "takeEvery",
+        fn: effects[e]
+      });
+    }
     return acc;
   }, []);
 }

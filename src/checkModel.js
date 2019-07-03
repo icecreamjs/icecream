@@ -1,4 +1,5 @@
 import invariant from "invariant";
+import { effectsName } from "./customEffects";
 
 const modelStructure = {
   modelname: "",
@@ -70,12 +71,22 @@ function checkModel(model) {
     model.reducers
   )();
   // Check if element of effects are only generators
-  checkTypeElementsInModel.bind(
-    null,
-    ["GeneratorFunction", "AsyncGeneratorFunction"],
-    model.modelname,
-    model.effects
-  )();
+  Object.keys(model.effects).forEach(e => {
+      if(typeof model.effects[e] !== 'function' && effectsName.includes(e)) {
+        checkTypeElementsInModel.bind(
+          null,
+          ["GeneratorFunction", "AsyncGeneratorFunction"],
+          model.modelname,
+          model.effects[e]
+        )();
+      } else if(typeof model.effects[e] !== 'function' && !effectsName.includes(e)) {
+        invariant(false, `"${e}" in model "${model.modelname}" is not recognized as a valid value.`);
+      } else {
+        const typeName = model.effects[e].constructor.displayName || model.effects[e].constructor.name;
+        invariant(["GeneratorFunction", "AsyncGeneratorFunction"].includes(typeName), `"${e}" in model "${model.modelname}" is not a GeneratorFunction.`);
+      }
+  });
+
   // Check if element of listeners are only functions
   checkTypeElementsInModel.bind(
     null,

@@ -12,6 +12,10 @@
       "models": {
         "title": "Models",
         "sidebar_label": "Models"
+      },
+      "testing": {
+        "title": "Testing",
+        "sidebar_label": "Testing"
       }
     },
     "links": {

@@ -108,7 +108,7 @@ class Index extends React.Component {
           structures that make code edition a headache. IceCream takes up the
           idea of **models** by the framework [*dvaJs*](https://dvajs.com/) to
           centralize all the logic but with a less opiniated behavior. It's why
-          iceCream is not considered a framework, but more as a tool to simplify
+          iceCream is not considered a framework, but more a tool to simplify
           and organize your code logic.
         </MarkdownBlock>
       </div>
@@ -128,7 +128,7 @@ class Index extends React.Component {
           {
             title: "requisite knowledge",
             content:
-              "iceCream helps you to use redux and redux-saga but you still have to known how they work and how to use them. Be sure to check their documentations before using iceCream!",
+              "iceCream helps you to use redux and redux-saga but you still have to know how they work and how to use them. Be sure to check their documentations before using iceCream!",
             image: `${baseUrl}img/infoLogo.svg`,
             imageAlt: "knowledge logo",
             imageAlign: "top"

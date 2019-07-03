@@ -2,7 +2,6 @@ import { all } from "redux-saga/effects";
 import * as customEffects from "./customEffects";
 
 /** create a saga
- * by default use takeEvery, but if fn is Array, use fn[0] which is the effect choose by the user
  */
 function createSagaFn({ type, effect, fn }) {
   return function*() {
