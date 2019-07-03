@@ -2,6 +2,19 @@
   "name": "icecream-please",
   "version": "0.0.1",
   "description": "a lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.",
+  "repository": "github:icecreamjs/icecream",
+  "bugs": "https://github.com/icecreamjs/icecream/issues",
+  "keywords": [
+    "redux",
+    "redux-saga",
+    "reducer",
+    "state",
+    "functional",
+    "flux",
+    "elm",
+    "management",
+    "javascript"
+  ],
   "main": "./index.js",
   "scripts": {
     "test": "jest",

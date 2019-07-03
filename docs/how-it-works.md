@@ -177,7 +177,7 @@ const App = props => {
 export default connect(({ counter }) => ({ counter }))(App);
 ```
 
-And Voilà! You can find this example [here](https://github.com) and a less basic [here](https://github.com).
+And Voilà! You can find this example [here](https://github.com/icecreamjs/icecream/tree/master/examples/icp-basicexample) and a less basic [here](https://github.com/icecreamjs/icecream/tree/master/examples/icecream-example).
 
 ## Middlewares and enhancers for Redux
 

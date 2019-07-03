@@ -1,0 +1,13 @@
+__test__/
+__mock__/
+/examples
+/docs
+/website
+/logo
+code-of-conduct.md
+README.md
+
+.DS_Store
+
+node_modules/
+npm-debug.log
