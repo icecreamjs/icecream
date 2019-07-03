@@ -230,7 +230,7 @@ describe("Model Structure: Type of elements in object...", () => {
     };
     expect(checkModel(mockModel5)).toBeTruthy();
   });
-  it("effects elements should be only GeneratorFunction", () => {
+  it("effects elements should be only GeneratorFunction or speical object of GeneratorFunction", () => {
     const mockModel0 = {
       modelname: "app",
       state: {
@@ -261,7 +261,7 @@ describe("Model Structure: Type of elements in object...", () => {
       listeners: {}
     };
     expect(() => checkModel(mockModel1)).toThrow(
-      '"fetch" in model "app" is not a GeneratorFunction.'
+      '"fetch" in model "app" is not recognized as a valid value.'
     );
     const mockModel2 = {
       modelname: "app",
@@ -277,7 +277,7 @@ describe("Model Structure: Type of elements in object...", () => {
       listeners: {}
     };
     expect(() => checkModel(mockModel2)).toThrow(
-      '"fetch" in model "app" is not a GeneratorFunction.'
+      '"fetch" in model "app" is not recognized as a valid value.'
     );
     const mockModel3 = {
       modelname: "app",
@@ -293,7 +293,7 @@ describe("Model Structure: Type of elements in object...", () => {
       listeners: {}
     };
     expect(() => checkModel(mockModel3)).toThrow(
-      '"fetch" in model "app" is not a GeneratorFunction.'
+      '"fetch" in model "app" is not recognized as a valid value.'
     );
     const mockModel4 = {
       modelname: "app",
@@ -309,7 +309,7 @@ describe("Model Structure: Type of elements in object...", () => {
       listeners: {}
     };
     expect(() => checkModel(mockModel4)).toThrow(
-      '"fetch" in model "app" is not a GeneratorFunction.'
+      '"fetch" in model "app" is not recognized as a valid value.'
     );
     const mockModel5 = {
       modelname: "app",
@@ -320,11 +320,49 @@ describe("Model Structure: Type of elements in object...", () => {
         active: () => {}
       },
       effects: {
-        *fetch() {}
+        takeLatst: {}
       },
       listeners: {}
     };
-    expect(checkModel(mockModel5)).toBeTruthy();
+    expect(() => checkModel(mockModel5)).toThrow(
+      '"takeLatst" in model "app" is not recognized as a valid value.'
+    );
+    const mockModel6 = {
+      modelname: "app",
+      state: {
+        active: true
+      },
+      reducers: {
+        active: () => {}
+      },
+      effects: {
+        *fetch() {},
+        takeLatest: {
+          send() {}
+        }
+      },
+      listeners: {}
+    };
+    expect(() => checkModel(mockModel6)).toThrow(
+      '"send" in model "app" is not a GeneratorFunction.'
+    );
+    const mockModel7 = {
+      modelname: "app",
+      state: {
+        active: true
+      },
+      reducers: {
+        active: () => {}
+      },
+      effects: {
+        *fetch() {},
+        takeLatest: {
+          *send() {}
+        }
+      },
+      listeners: {}
+    };
+    expect(checkModel(mockModel7)).toBeTruthy();
   });
   it("listeners elements should be only Function", () => {
     const mockModel0 = {
