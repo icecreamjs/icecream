@@ -24,7 +24,7 @@ const siteConfig = {
   title: "iceCream", // Title for your website.
   tagline:
     "A lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.",
-  url: "https://your-docusaurus-test-site.com", // Your website URL
+  url: "https://icecreamjs.netlify.com", // Your website URL
   baseUrl: "/", // Base URL for your project */
   // For github.io type URLs, you would set the url and baseUrl like:
   //   url: 'https://facebook.github.io',
@@ -71,6 +71,7 @@ const siteConfig = {
   // This copyright info is used in /core/Footer.js and blog RSS/Atom feeds.
   copyright: `Copyright © ${new Date().getFullYear()} Renaud Déchaux`,
 
+
   highlight: {
     // Highlight.js theme to use for syntax highlighting in code blocks.
     theme: "default"
@@ -86,7 +87,7 @@ const siteConfig = {
 
   // Open Graph and Twitter card images.
   ogImage: "img/docusaurus.png",
-  twitterImage: "img/docusaurus.png"
+  twitterImage: "img/docusaurus.png",
 
   // Show documentation's last contributor's name.
   // enableUpdateBy: true,
@@ -96,7 +97,7 @@ const siteConfig = {
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  //   repoUrl: 'https://github.com/facebook/test-site',
+  repoUrl: 'https://github.com/icecreamjs/icecream',
 };
 
 module.exports = siteConfig;
