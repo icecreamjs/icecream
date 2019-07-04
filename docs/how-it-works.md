@@ -81,7 +81,7 @@ export default {
 };
 ```
 
-You have in this model the state of the counter with his initial value and the reducers to mutate the state. Even if we don't use any effects or listeners, keys must be there with an empty object. Model's structure are immutable, if you want to know more about it, you can directly click here.
+You have in this model the state of the counter with his initial value and the reducers to mutate the state. Even if we don't use any effects or listeners, keys must be there with an empty object. Model's structure are immutable, if you want to know more about it, you can directly click [here](https://icecreamjs.netlify.com/docs/models).
 
 Ok, you remember the code at the top of this page? Well we do exactly the same thing here:
 
