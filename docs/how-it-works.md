@@ -28,7 +28,7 @@ IceCreamPlease is a function that you import in the root file of your project. T
 
 ## Install package
 
-Use your favorite packages manager:
+Use your favorite package manager:
 
 ```bash
 yarn add icecream-please
@@ -43,8 +43,8 @@ npm i --save icecream-please
 ## Basic example
 
 Let's start by writting a model.
-A model is a classic JavaScript object `key/value` that will contains all the necessary logic for a part of your application to works.
-You can have only one model for your entire application, but it usually useful to organize your application by splitting it in differents parts.
+A model is a classic JavaScript object `key/value` that will contain all the necessary logic for a part of your application to work.
+You can have only one model for your entire application, but it is usually useful to organize your application by splitting it in differents parts.
 
 Let's create a model to handle a basic counter:
 
@@ -81,9 +81,9 @@ export default {
 };
 ```
 
-You have in this model the state of the counter with his initial value and the reducers to mutate the state. Even if we don't use any effects or listeners, keys must be there with an empty object. Model's structure are immutable, if you want to know more about it, you can directly click [here](https://icecreamjs.netlify.com/docs/models).
+You have in this model the state of the counter with its initial value and the reducers to mutate the state. Even if we don't use any effects or listeners, keys must be there with an empty object. Model's structure are immutable, if you want to know more about it, you can directly click [here](https://icecreamjs.netlify.com/docs/models).
 
-Ok, you remember the code at the top of this page? Well we do exactly the same thing here:
+Ok, do you remember the code at the top of this page? Well, we do exactly the same thing here:
 
 ```js
 // index.js
@@ -120,7 +120,7 @@ const Container = () => (
 ReactDOM.render(<Container />, document.getElementById("root"));
 ```
 
-Here the code of the App.js file:
+Here is the code of the App.js file:
 
 ```js
 // App.js
@@ -171,7 +171,7 @@ And Voilà! You can find this example [here](https://github.com/icecreamjs/icecr
 
 ## Middlewares and enhancers for Redux
 
-IceCreamPlease takes as argument an object which can have the `models` key that we just saw above and two others: `middlewares` and `enhancers`.
+IceCreamPlease takes as an argument an object which can have the `models` key that we just saw above and two others: `middlewares` and `enhancers`.
 
 To have the same behavior that:
 

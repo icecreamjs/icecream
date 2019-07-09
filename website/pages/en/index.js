@@ -102,9 +102,9 @@ class Index extends React.Component {
         <h2>Motivations</h2>
         <MarkdownBlock>
           [*Redux*](https://redux.js.org/) and
-          [*redux-saga*](https://redux-saga.js.org/) are commonly use to handle
-          globals states in moderns JavaScript applications. Their integrations
-          in projects on the long term can be painfull and lead to complex files
+          [*redux-saga*](https://redux-saga.js.org/) are commonly used to handle
+          global states in modern JavaScript applications. Their integrations
+          in projects in the long term can be painful and lead to complex files
           structures that make code edition a headache. IceCream takes up the
           idea of **models** by the framework [*dvaJs*](https://dvajs.com/) to
           centralize all the logic but with a less opiniated behavior. It's why

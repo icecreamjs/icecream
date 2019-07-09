@@ -9,11 +9,11 @@ hide_title: true
 
 ## How to test our model reducer?
 
-Testing functions of models is easy, since we just have to import the model in a file and testing it.
+Testing functions of models is easy, since we just have to import the model in a file and test it.
 
 
 But testing the reducer of a particular model is harder.
-For that iceCream provide a function `getArrayFromModelReducers` that take as arguments the modelname and the reducers object of your model and return an array of all your reducers of the model you are testing. With the library [reduce-reducers](https://www.npmjs.com/package/reduce-reducers) you can create a reducer and testing it to see if it mutate the state as desire:
+For that iceCream provides a function `getArrayFromModelReducers` that take, as arguments, the modelname and the reducers object of your model and returns an array of all your reducers of the model you are testing. With the library [reduce-reducers](https://www.npmjs.com/package/reduce-reducers) you can create a reducer and test it to see if it mutates the state as desired:
 
 ```js
 import reduceReducers from "reduce-reducers";
