@@ -42,9 +42,9 @@ npm i --save icecream-please
 
 ## Basic example
 
-Let's start by writting a model.
+Let's start by writing a model.
 A model is a classic JavaScript object `key/value` that will contain all the necessary logic for a part of your application to work.
-You can have only one model for your entire application, but it is usually useful to organize your application by splitting it in differents parts.
+You can have only one model for your entire application, but it is usually useful to organize your application by splitting it in different parts.
 
 Let's create a model to handle a basic counter:
 

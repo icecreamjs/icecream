@@ -58,7 +58,7 @@ function checkModel(model) {
   );
   // Check if modelname is not just white space or empty and regular word
   invariant(
-    /^[A-Za-z]+$/.test(model.modelname),
+    /^[A-Za-z_]+$/.test(model.modelname),
     "modelname should be a regular word, no special character, not white space and not empty"
   );
 

@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import createSagaMiddleware from "redux-saga";
 import invariant from "invariant";
 // Import functions
+import { _loadingModel } from "./handleLoading";
 import splitModels from "./splitModels";
 import createReducer from "./createReducer";
 import createSaga from "./createSaga";
@@ -50,6 +51,8 @@ function build(
  */
 function initialize(configuration) {
   const { models, middlewares, enhancers } = configuration;
+  // We inject the loading model
+  models.push(_loadingModel);
   try {
     const [initialState, reducers, listeners, effects] = splitModels(models);
     const store = build(

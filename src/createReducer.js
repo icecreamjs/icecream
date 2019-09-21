@@ -12,7 +12,7 @@ function reduceForRedux(...reducers) {
 
     return reducers.reduce((state, fn) => {
       const newState = fn(state[model], action);
-      const _ic = { lD: action.type };
+      const _ic = model !== '_loading' ? { lD: action.type } : prevState._ic;
       return {
         ...prevState,
         [model]: newState,

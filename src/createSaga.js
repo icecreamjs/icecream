@@ -1,12 +1,15 @@
 import { all } from "redux-saga/effects";
 import * as customEffects from "./customEffects";
+import { loadingEffectWrapper } from './handleLoading';
 
 /** create a saga
  */
 function createSagaFn({ type, effect, fn }) {
-  return function*() {
-    yield customEffects[effect](type, fn);
-  };
+  const modelName = type.split('/')[0];
+  const fnName = type.split('/')[1];
+  return function *() {
+    yield customEffects[effect](type, loadingEffectWrapper(modelName, fnName, fn));
+  }
 }
 
 /** generate the saga from the model
