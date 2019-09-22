@@ -6,10 +6,10 @@ const App = props => {
 
   const {
     counter: { number },
-    user: { name, post, fetchingPost },
+    user: { name, post },
+    _loading: {user : loadingUser},
     dispatch
   } = props;
-
   return (
     <div style={{ textAlign: "center" }}>
       <h1>{`Hello ${name}`}</h1>
@@ -63,7 +63,7 @@ const App = props => {
             onChange={e => setPostId(e.target.value)}
           />
         </div>
-        {fetchingPost ? (
+        {loadingUser.global ? (
           <p>fetching...</p>
         ) : (
           Object.keys(post).length > 0 && (
@@ -78,4 +78,4 @@ const App = props => {
   );
 };
 
-export default connect(({ counter, user }) => ({ counter, user }))(App);
+export default connect(({ counter, user, _loading }) => ({ counter, user, _loading }))(App);

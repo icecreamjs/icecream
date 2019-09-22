@@ -5,7 +5,6 @@ export default {
   state: {
     name: "",
     post: {},
-    fetchingPost: false
   },
   reducers: {
     name(state, { name }) {
@@ -21,16 +20,11 @@ export default {
         fetchingPost: false
       };
     },
-    fetchingPost(state) {
-      return {
-        ...state,
-        fetchingPost: !state.fetchingPost
-      };
-    }
   },
   effects: {
-    *fetchPost({ id }, { call, put }) {
+    *fetchPost({ id }, { call, put, delay }) {
       try {
+        yield delay(2000);
         const data = yield call(getPostFromUser, id);
         if (data) {
           yield put({ type: "user/addPost", post: data });
@@ -38,13 +32,19 @@ export default {
       } catch (error) {
         console.error(error);
       }
-    }
-  },
-  listeners: {
-    listen(state, lastDispatch, dispatch) {
-      if (lastDispatch === "user/fetchPost") {
-        dispatch({ type: "user/fetchingPost" });
+    },
+    takeLatest: {
+      *fetchPostLatest({ id }, { call, put }) {
+        try {
+          const data = yield call(getPostFromUser, id);
+          if (data) {
+            yield put({ type: "user/addPost", post: data });
+          }
+        } catch (error) {
+          console.error(error);
+        }
       }
-    }
-  }
+    },
+  },
+  listeners: {}
 };
