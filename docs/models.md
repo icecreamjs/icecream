@@ -181,3 +181,35 @@ As you can see, the signature of a listeners function is composed of 3 elements:
   * the state of the model
   * the type of the last dispatch to avoid infinite loop
   * the redux dispatch function
+
+## helpers models from iceCream (last dispatch and loading)
+
+IceCream automatically create two models to assist you. You can find the states of those models via redux.
+The first one hold the type of the last dispatch and can be access via:
+
+```js
+const { _ic: { lD } } = state;
+```
+The second one allows you to know if one of your effects in a model is currently in execution. Here the structure of the _loading's state:
+
+```js
+{
+  yourModelName1: {
+    global: true,
+    yourEffectName1: false,
+    yourEffectName2: true,
+    yourEffectName3: false,
+    ...
+  },
+  yourModelName2: {
+    global: false,
+    yourEffectName1: false,
+    yourEffectName2: false,
+    yourEffectName3: false,
+    ...
+  },
+  ...
+}
+```
+
+With that, you can easily display a spinner or other things while a request on yours effects is going on. 
