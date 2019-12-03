@@ -1,6 +1,6 @@
 {
   "name": "icecream-please",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "a lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.",
   "repository": "github:icecreamjs/icecream",
   "bugs": "https://github.com/icecreamjs/icecream/issues",
