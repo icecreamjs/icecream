@@ -1,3 +1,5 @@
+# THIS REPO IS NOT MAINTAINED ANYMORE
+
 # iceCream
 
 **A lightweight solution to handle your redux state, reducers, listeners and sagas in a convenient way.**
